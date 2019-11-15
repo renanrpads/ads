@@ -3,7 +3,7 @@
             SENAI FATESG
             ADS 1º PERIODO (02.19)
             SITUAÇÃO DE APRENDIZAGEM
-            PROF.: UJERFESON
+            PROF.: UJEFERSON
             ALUNOS: ANTHONY | DANIEL ELYADES | FLAVIO DANILO | MARCOS JOB
 
 
