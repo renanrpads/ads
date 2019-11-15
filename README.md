@@ -1,2 +1,2 @@
 # ads
-Trabalhos relacionados ao curso de ADS em andamento na faculdade SENAI FATESG
+Trabalhos relacionados ao curso de ADS (em andamento - SENAI FATESG)
