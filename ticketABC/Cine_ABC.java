@@ -2,44 +2,96 @@
             SENAI FATESG
             ADS 1º PERIODO (02.19)
             PROJETO INTEGRADOR
-            COORDENADOR PROJETO: BETE
+            COORDENADOR PROJETO: ELISABETH
             EQUIPE: MARCOS JOB | RENAN | WATLAS
 
  */
 package cine_abc;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Cine_ABC {
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // variáveis imutáveis
+        String disponivel = "[ ]", meia = "[I]", inteira = "[M]";
+        int maxLin = 10, maxCol = 10;
 
 //------------------------------------------------------------------------------
-//                    CADASTRO DE POLTRONAS POR SESSÃO
+//                GESTÃO DE POLTRONAS (CARGA INICIAL E ALTERAÇÕES)
 //------------------------------------------------------------------------------        
+        // Cadastro de poltronas sessão 1
+        String[][] sessao1 = new String[maxLin][maxCol];
+        char fileiras = 'A';
+        int poltronas = 1;
+
+        for (int lin = 0; lin < maxLin; lin++) {
+            for (int col = 0; col < maxCol; col++) {
+                if (col == 9) {
+                    sessao1[lin][col] = String.valueOf(fileiras)
+                            + String.valueOf(poltronas)
+                            + disponivel;
+                } else {
+                    sessao1[lin][col] = String.valueOf(fileiras)
+                            + "0"
+                            + String.valueOf(poltronas)
+                            + disponivel;
+                }
+                poltronas++;
+                System.out.print(sessao1[lin][col] + "\t");
+            }
+            fileiras++;
+            poltronas = 1;
+            System.out.println("");
+        }
+
+        // Escolha de poltronas aleatória (20%)        
+        int limInfTipo = 1, limSupTipo = 2;
+        int tipoIngresso = sorteiaTipo(limInfTipo, limSupTipo);
 
         /*
-Declarar 2 vetores referênciais linhas (A a J) e colunas (1 a 10)
+        System.out.println("Informe o código da poltrona que deseja reservar:");
+        String poltrona = "";
+        poltrona = sc.nextLine();
 
-Declarar 9 matrizes int para apresetação e seleção de poltrona
-poltronas1, poltronas2, poltronas3, poltronas4, poltronas5, poltronas6
-poltronas7, poltronas8, poltronas9
+        // reserva de poltrona
+        for (int lin = 0; lin < maxLin; lin++) {
+            for (int col = 0; col < maxCol; col++) {
+                if (sessao1[col][lin].equals(poltrona + disponivel)) {
+                    if (tipoIngresso == 1) {
+                        sessao1[col][lin] = poltrona + inteira;
+                    } else {
+                        sessao1[col][lin] = poltrona + meia;
+                    }
+                }
+            }
+        } */
 
-Incluir lógica para poltronas oculpadas 0 (inteira) e -1 (meia)
-
-montar lógica para preencher aleatoriamente 20% de todas matrizes
-
-         */
+ /*   
+        algoritimo para comparar entre legendas
+        if (p1[1][1].substring(3).equals("[DIS.]")) {
+            System.out.println("OK");
+        } */
+        // LEGENDAS
+        // O código da poltrona é composto por 3 caractéres 
+        // letra da fileira + Nº da poltrona com 2 casas decimais (exemplo: A01)
+        // [**DIS] = POLTRONA DISPONÍVEL , 
+        // [--MEI] = POLTRONA OCULPADA (INGRESSO MEIA)
+        // [--INT] = POLTRONA OCULPADA (INGRESSO INTEIRA)
 //------------------------------------------------------------------------------
 //                               MENU MÓDULOS
 //------------------------------------------------------------------------------        
-        Scanner sc = new Scanner(System.in);
         boolean valida = true;
         int opcaoM = 0;
 
-        System.out.print("Bem-vindo(a) ao CINE ABC\n\n");
+        System.out.print(
+                "Bem-vindo(a) ao CINE ABC\n\n");
 
-        System.out.println("MENU:\n\n"
+        System.out.println(
+                "MENU:\n\n"
                 + "[1] Vendas de ingressos\n"
                 + "[2] Histórico de ingressos\n"
                 + "[3] Relatórios\n"
@@ -67,7 +119,8 @@ montar lógica para preencher aleatoriamente 20% de todas matrizes
 //------------------------------------------------------------------------------
 //                                MENU SESSÕES
 //------------------------------------------------------------------------------          
-        if (opcaoM == 1) {
+        if (opcaoM
+                == 1) {
 
             // cadatro das sessões
             int opcaoS = 0;
@@ -120,4 +173,17 @@ Replicar para os demais modelos (edição vinculo matriz) WATLAS
 
          */
     }
+
+    public static int sorteiaTipo(int limInfTipo, int limSupTipo) {
+        Random rd = new Random();
+        return rd.nextInt(limSupTipo - limInfTipo + 1) + limInfTipo;
+
+    }
+
+    public static int sorteiaPoltrona(int limInfTipo, int limSupTipo) {
+        Random rd = new Random();
+        return rd.nextInt(limSupTipo - limInfTipo + 1) + limInfTipo;
+
+    }
+
 }
