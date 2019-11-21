@@ -16,20 +16,23 @@ public class Cine_ABC {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // variáveis imutáveis
+        // Variáveis imutáveis
         String disponivel = "[ ]", meia = "[I]", inteira = "[M]";
         int maxLin = 10, maxCol = 10;
+        int limInfTipo = 1, limSupTipo = 2;
+        int limInfPoltrona = 0, limSupPoltrona = 9;
 
 //------------------------------------------------------------------------------
-//                GESTÃO DE POLTRONAS (CARGA INICIAL E ALTERAÇÕES)
+//                    CARGA INICIAL COM 20% DE OCUPAÇÃO
 //------------------------------------------------------------------------------        
-        // Cadastro de poltronas sessão 1
+        // Cadastro de poltronas SESSÃO 1
         String[][] sessao1 = new String[maxLin][maxCol];
         char fileiras = 'A';
         int poltronas = 1;
 
         for (int lin = 0; lin < maxLin; lin++) {
             for (int col = 0; col < maxCol; col++) {
+
                 if (col == 9) {
                     sessao1[lin][col] = String.valueOf(fileiras)
                             + String.valueOf(poltronas)
@@ -48,39 +51,39 @@ public class Cine_ABC {
             System.out.println("");
         }
 
-        // Escolha de poltronas aleatória (20%)        
-        int limInfTipo = 1, limSupTipo = 2;
-        int tipoIngresso = sorteiaTipo(limInfTipo, limSupTipo);
+        System.out.println("\n\n\n");
 
-        /*
-        System.out.println("Informe o código da poltrona que deseja reservar:");
-        String poltrona = "";
-        poltrona = sc.nextLine();
+        // Oculpação aleatória de 20% das poltronas 
+        for (int cont = 0; cont < 20; cont++) {
+            int tipoIngresso = sorteiaTipo(limInfTipo, limSupTipo);
+            int i = sorteiaPoltrona(limInfPoltrona, limSupPoltrona);
+            int j = sorteiaPoltrona(limInfPoltrona, limSupPoltrona);
+            if (tipoIngresso == 1) {
+                while (sessao1[i][j].substring(3).equals(meia)
+                        || sessao1[i][j].substring(3).equals(inteira)) {
+                    i = sorteiaPoltrona(limInfPoltrona, limSupPoltrona);
+                    j = sorteiaPoltrona(limInfPoltrona, limSupPoltrona);
+                }
+                sessao1[i][j] = sessao1[i][j].substring(0,
+                        sessao1[i][j].length() - 3) + inteira;
+            } else {
+                while (sessao1[i][j].substring(3).equals(meia)
+                        || sessao1[i][j].substring(3).equals(inteira)) {
+                    i = sorteiaPoltrona(limInfPoltrona, limSupPoltrona);
+                    j = sorteiaPoltrona(limInfPoltrona, limSupPoltrona);
+                }
+                sessao1[i][j] = sessao1[i][j].substring(0,
+                        sessao1[i][j].length() - 3) + meia;
+            }
+        }
 
-        // reserva de poltrona
         for (int lin = 0; lin < maxLin; lin++) {
             for (int col = 0; col < maxCol; col++) {
-                if (sessao1[col][lin].equals(poltrona + disponivel)) {
-                    if (tipoIngresso == 1) {
-                        sessao1[col][lin] = poltrona + inteira;
-                    } else {
-                        sessao1[col][lin] = poltrona + meia;
-                    }
-                }
+                System.out.print(sessao1[lin][col] + "\t");
             }
-        } */
+            System.out.println("");
+        }
 
- /*   
-        algoritimo para comparar entre legendas
-        if (p1[1][1].substring(3).equals("[DIS.]")) {
-            System.out.println("OK");
-        } */
-        // LEGENDAS
-        // O código da poltrona é composto por 3 caractéres 
-        // letra da fileira + Nº da poltrona com 2 casas decimais (exemplo: A01)
-        // [**DIS] = POLTRONA DISPONÍVEL , 
-        // [--MEI] = POLTRONA OCULPADA (INGRESSO MEIA)
-        // [--INT] = POLTRONA OCULPADA (INGRESSO INTEIRA)
 //------------------------------------------------------------------------------
 //                               MENU MÓDULOS
 //------------------------------------------------------------------------------        
@@ -180,10 +183,38 @@ Replicar para os demais modelos (edição vinculo matriz) WATLAS
 
     }
 
-    public static int sorteiaPoltrona(int limInfTipo, int limSupTipo) {
+    public static int sorteiaPoltrona(int limInfPoltrona, int limSupPoltrona) {
         Random rd = new Random();
-        return rd.nextInt(limSupTipo - limInfTipo + 1) + limInfTipo;
+        return rd.nextInt(limSupPoltrona - limInfPoltrona + 1) + limInfPoltrona;
 
     }
 
 }
+
+/*
+
+
+LOGICA INICIAL PARA VENDA DE INGRESSOS
+
+        System.out.println("Informe o código da poltrona que deseja reservar:");
+        String poltrona = "";
+        poltrona = sc.nextLine();
+
+        // reserva de poltrona
+        for (int lin = 0; lin < maxLin; lin++) {
+            for (int col = 0; col < maxCol; col++) {
+                if (sessao1[col][lin].equals(poltrona + disponivel)) {
+                    if (tipoIngresso == 1) {
+                        sessao1[col][lin] = poltrona + inteira;
+                    } else {
+                        sessao1[col][lin] = poltrona + meia;
+                    }
+                }
+            }
+        } */
+
+ /*   
+        algoritimo para comparar entre legendas
+        if (p1[1][1].substring(3).equals("[DIS.]")) {
+            System.out.println("OK");
+        } */
